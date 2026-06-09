@@ -34,8 +34,8 @@ class StoreStorageCredentialsController
         // Get storage driver from request
         $driver = match ($request->input('storage.driver')) {
             's3', 'storj', 'spaces', 'wasabi', 'backblaze', 'oss', 'other' => 's3',
-            'local' => 'local',
-            'ftp'   => 'ftp',
+            'local'                                                        => 'local',
+            'ftp'                                                          => 'ftp',
         };
 
         if (! app()->runningUnitTests()) {

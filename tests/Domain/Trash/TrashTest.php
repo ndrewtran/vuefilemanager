@@ -8,12 +8,11 @@ use Laravel\Sanctum\Sanctum;
 use Domain\Files\Models\File;
 use Domain\Folders\Models\Folder;
 use Illuminate\Http\UploadedFile;
+use PHPUnit\Framework\Attributes\Test;
 
 class TrashTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_restore_items_from_trash()
     {
         $user = User::factory()
@@ -55,9 +54,7 @@ class TrashTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_dump_trash()
     {
         $user = User::factory()

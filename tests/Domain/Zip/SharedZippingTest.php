@@ -9,12 +9,11 @@ use Domain\Files\Models\File;
 use Domain\Sharing\Models\Share;
 use Domain\Folders\Models\Folder;
 use Illuminate\Http\UploadedFile;
+use PHPUnit\Framework\Attributes\Test;
 
 class SharedZippingTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function visitor_zip_shared_multiple_files()
     {
         // check private or public share record
@@ -104,9 +103,7 @@ class SharedZippingTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function visitor_try_zip_not_shared_file_with_already_shared_multiple_files()
     {
         // check private or public share record
@@ -167,9 +164,7 @@ class SharedZippingTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function visitor_zip_shared_folder()
     {
         // check private or public share record
@@ -235,9 +230,7 @@ class SharedZippingTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function visitor_try_zip_not_shared_folder()
     {
         // check private or public share record

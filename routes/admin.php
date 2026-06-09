@@ -5,7 +5,6 @@ use Domain\Pages\Controllers\AdminPagesController;
 use Domain\Settings\Controllers\FlushCacheController;
 use Domain\Localization\Controllers\LanguageController;
 use Domain\Admin\Controllers\Users\DeleteUserController;
-use Domain\Settings\Controllers\UpgradeLicenseController;
 use Domain\Settings\Controllers\GetServerStatusController;
 use Domain\Settings\Controllers\GetSettingsValueController;
 use Domain\Admin\Controllers\Dashboard\GetNewbiesController;

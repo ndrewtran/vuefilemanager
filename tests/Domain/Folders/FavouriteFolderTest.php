@@ -4,12 +4,11 @@ namespace Tests\Domain\Folders;
 use Tests\TestCase;
 use App\Users\Models\User;
 use Domain\Folders\Models\Folder;
+use PHPUnit\Framework\Attributes\Test;
 
 class FavouriteFolderTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_add_folder_to_favourites()
     {
         $folder = Folder::factory()
@@ -33,9 +32,7 @@ class FavouriteFolderTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_remove_folder_from_favourites()
     {
         $folder = Folder::factory()

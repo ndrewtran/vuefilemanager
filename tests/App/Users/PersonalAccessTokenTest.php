@@ -5,12 +5,11 @@ use Tests\TestCase;
 use App\Users\Models\User;
 use Domain\Files\Models\File;
 use Domain\Folders\Models\Folder;
+use PHPUnit\Framework\Attributes\Test;
 
 class PersonalAccessTokenTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_create_user_token()
     {
         $user = User::factory()
@@ -30,9 +29,7 @@ class PersonalAccessTokenTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_revoke_user_token()
     {
         $user = User::factory()
@@ -53,9 +50,7 @@ class PersonalAccessTokenTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_user_tokens()
     {
         $user = User::factory()
@@ -79,9 +74,7 @@ class PersonalAccessTokenTest extends TestCase
             ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_use_user_token_in_public_api_request()
     {
         $user = User::factory()

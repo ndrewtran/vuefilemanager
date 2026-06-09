@@ -2,8 +2,8 @@
 namespace App\Users\Models;
 
 use ByteUnits\Metric;
-use Illuminate\Support\Str;
 use BadMethodCallException;
+use Illuminate\Support\Str;
 use Domain\Files\Models\File;
 use Domain\Folders\Models\Folder;
 use Laravel\Sanctum\HasApiTokens;

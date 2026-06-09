@@ -4,13 +4,12 @@ namespace Tests\Domain\Pages;
 use Tests\TestCase;
 use App\Users\Models\User;
 use Laravel\Sanctum\Sanctum;
+use PHPUnit\Framework\Attributes\Test;
 use Domain\Pages\Actions\SeedDefaultPagesAction;
 
 class AdminPagesTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_all_pages()
     {
         resolve(SeedDefaultPagesAction::class)();
@@ -30,9 +29,7 @@ class AdminPagesTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_page()
     {
         resolve(SeedDefaultPagesAction::class)();
@@ -49,9 +46,7 @@ class AdminPagesTest extends TestCase
             ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_update_page()
     {
         resolve(SeedDefaultPagesAction::class)();

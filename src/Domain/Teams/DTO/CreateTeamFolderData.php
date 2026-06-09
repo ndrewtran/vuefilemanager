@@ -1,12 +1,16 @@
 <?php
 namespace Domain\Teams\DTO;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
-class CreateTeamFolderData extends DataTransferObject
+class CreateTeamFolderData
 {
     public string $name;
     public array $invitations;
+
+    public function __construct(array $data)
+    {
+        $this->name = $data['name'];
+        $this->invitations = $data['invitations'];
+    }
 
     public static function fromRequest($request): self
     {

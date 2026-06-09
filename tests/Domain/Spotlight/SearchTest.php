@@ -6,12 +6,11 @@ use App\Users\Models\User;
 use Domain\Files\Models\File;
 use Domain\Folders\Models\Folder;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\Test;
 
 class SearchTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_searched_file()
     {
         $user = User::factory()
@@ -40,7 +39,7 @@ class SearchTest extends TestCase
             ->each(
                 fn ($file) => $this
                     ->actingAs($user)
-                    ->getJson('/api/search?query=' . mb_strtolower(mb_substr($file->name, 0, 3)))
+                    ->getJson('/api/search?query=' . rawurlencode(mb_strtolower(mb_substr($file->name, 0, 3))))
                     ->assertStatus(200)
                     ->assertJsonFragment([
                         'id'   => $file->id,
@@ -49,9 +48,7 @@ class SearchTest extends TestCase
             );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_searched_folder()
     {
         $user = User::factory()
@@ -73,9 +70,7 @@ class SearchTest extends TestCase
             ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_searched_shared_with_me_file_and_folders()
     {
         $owner = User::factory()

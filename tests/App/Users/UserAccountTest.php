@@ -8,13 +8,12 @@ use App\Users\Models\User;
 use Domain\Folders\Models\Folder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\URL;
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Auth\Notifications\VerifyEmail;
 
 class UserAccountTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_generate_and_store_user()
     {
         $user = User::factory()
@@ -34,9 +33,7 @@ class UserAccountTest extends TestCase
             ->assertExists('files/' . User::first()->id);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_test_user_timezone()
     {
         $user = User::factory()
@@ -59,9 +56,7 @@ class UserAccountTest extends TestCase
             ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_change_user_password_in_profile_settings()
     {
         $user = User::factory()
@@ -87,9 +82,7 @@ class UserAccountTest extends TestCase
         ])->assertStatus(200);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_update_user_settings()
     {
         $user = User::factory()
@@ -108,9 +101,7 @@ class UserAccountTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_update_user_avatar()
     {
         $user = User::factory()
@@ -137,9 +128,7 @@ class UserAccountTest extends TestCase
             );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_user_data()
     {
         $user = User::factory()
@@ -178,7 +167,7 @@ class UserAccountTest extends TestCase
                             'canDownload'          => true,
                             'canInviteTeamMembers' => true,
                             'canUpload'            => true,
-                            'reason' => null,
+                            'reason'               => null,
                         ],
                     ],
                     'relationships' => [
@@ -216,9 +205,7 @@ class UserAccountTest extends TestCase
             ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_verify_user_email()
     {
         $user = User::factory()
@@ -239,9 +226,7 @@ class UserAccountTest extends TestCase
         $this->assertNotNull(User::find($user->id)->email_verified_at);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_resend_user_verify_email()
     {
         $user = User::factory()
@@ -254,6 +239,6 @@ class UserAccountTest extends TestCase
         ])
             ->assertStatus(200);
 
-        Notification::assertTimesSent(1, VerifyEmail::class);
+        Notification::assertSentTimes(VerifyEmail::class, 1);
     }
 }

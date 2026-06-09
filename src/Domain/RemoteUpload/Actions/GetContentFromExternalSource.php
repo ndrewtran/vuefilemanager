@@ -90,9 +90,9 @@ class GetContentFromExternalSource
 
                 // Move file to external storage
                 match (config('filesystems.default')) {
-                    's3' => ($this->moveFileToExternalStorage)($basename, $user->id),
+                    's3'           => ($this->moveFileToExternalStorage)($basename, $user->id),
                     'ftp', 'azure' => ($this->moveFileToFTPStorage)($basename, $user->id),
-                    default => null
+                    default        => null
                 };
 
                 // Increment processed items count

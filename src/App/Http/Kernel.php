@@ -1,12 +1,12 @@
 <?php
 namespace App\Http;
 
-use Fruitcake\Cors\HandleCors;
 use Support\Middleware\AdminCheck;
 use Support\Middleware\TrimStrings;
 use Support\Middleware\TrustProxies;
 use Support\Middleware\EncryptCookies;
 use Support\Middleware\VerifyCsrfToken;
+use Illuminate\Http\Middleware\HandleCors;
 use Illuminate\Session\Middleware\StartSession;
 use Support\Middleware\ProtectSetupWizardRoutes;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;

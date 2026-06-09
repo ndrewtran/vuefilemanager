@@ -1,9 +1,7 @@
 <?php
 namespace App\Users\DTO;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
-class CreateUserData extends DataTransferObject
+class CreateUserData
 {
     public string $role;
     public string $name;
@@ -11,6 +9,16 @@ class CreateUserData extends DataTransferObject
     public ?string $password;
     public ?string $oauth_provider;
     public ?string $avatar;
+
+    public function __construct(array $data)
+    {
+        $this->role = $data['role'];
+        $this->name = $data['name'];
+        $this->email = $data['email'];
+        $this->avatar = $data['avatar'];
+        $this->password = $data['password'];
+        $this->oauth_provider = $data['oauth_provider'];
+    }
 
     public static function fromRequest($request): self
     {

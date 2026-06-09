@@ -20,15 +20,15 @@ import Echo from 'laravel-echo';
 
 window.Pusher = require('pusher-js');
 
-if (config.broadcasting) {
+if (['pusher', 'reverb'].includes(config.broadcasting)) {
 	window.Echo = new Echo({
 		broadcaster: 'pusher',
 		cluster: config.broadcastingCluster,
 		key: config.broadcastingKey,
 		wsHost: config.broadcastingHost,
-		wsPort: config.broadcastingPort,
-		wssPort: config.broadcastingPort,
-		forceTLS: false,
+		wsPort: config.broadcastingPort || 80,
+		wssPort: config.broadcastingPort || 443,
+		forceTLS: config.broadcasting === 'reverb' && window.location.protocol === 'https:',
 		enabledTransports: ['ws', 'wss'],
 	});
 }

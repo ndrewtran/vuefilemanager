@@ -72,7 +72,7 @@ class MeteredBillingRestrictionsEngine implements RestrictionsEngine
         if ($this->getDunningSequenceCount($user) === 3) {
             return match ($user->dunning->type) {
                 'limit_usage_in_new_accounts' => 'Please make your first payment to cover your usage.',
-                'usage_bigger_than_balance' => 'Please increase your account balance higher than your monthly usage.',
+                'usage_bigger_than_balance'   => 'Please increase your account balance higher than your monthly usage.',
             };
         }
 
@@ -94,6 +94,6 @@ class MeteredBillingRestrictionsEngine implements RestrictionsEngine
 
     private function checkFailedPayments(User $user): bool
     {
-        return cache()->remember("failed-payments-count.$user->id", 3600, fn () => !($user->failedPayments()->count() >= 3));
+        return cache()->remember("failed-payments-count.$user->id", 3600, fn () => ! ($user->failedPayments()->count() >= 3));
     }
 }

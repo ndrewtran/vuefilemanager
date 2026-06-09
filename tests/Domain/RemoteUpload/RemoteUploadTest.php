@@ -9,13 +9,12 @@ use Domain\Files\Models\File;
 use Domain\Folders\Models\Folder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\Test;
 use Domain\RemoteUpload\Events\RemoteFileCreatedEvent;
 
 class RemoteUploadTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_remotely_upload_new_file()
     {
         Event::fake([

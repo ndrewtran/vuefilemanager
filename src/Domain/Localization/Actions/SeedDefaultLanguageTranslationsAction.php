@@ -14,7 +14,7 @@ class SeedDefaultLanguageTranslationsAction
             config('custom-language-translations'),
         ])
             ->collapse()
-            ->map(fn($value, $key) => [
+            ->map(fn ($value, $key) => [
                 'lang'  => $locale,
                 'value' => $value,
                 'key'   => $key,

@@ -35,13 +35,11 @@ class UpgradeLanguageTranslationsAction
         // Store new translations for every language
         $locales->each(function ($locale) use ($newbies) {
             $translations = $newbies
-                ->map(function ($value, $key) use ($locale) {
-                    return [
-                        'lang'  => $locale,
-                        'value' => $value,
-                        'key'   => $key,
-                    ];
-                })->toArray();
+                ->map(fn ($value, $key) => [
+                    'lang'  => $locale,
+                    'value' => $value,
+                    'key'   => $key,
+                ])->toArray();
 
             $chunks = array_chunk($translations, 100);
 

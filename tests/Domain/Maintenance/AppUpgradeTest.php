@@ -5,13 +5,12 @@ use DB;
 use Tests\TestCase;
 use App\Users\Models\User;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 use Support\Upgrading\Actions\UpdateSystemAction;
 
 class AppUpgradeTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_upgrade_default_language_translations()
     {
         $user = User::factory()
@@ -58,9 +57,7 @@ class AppUpgradeTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_upgrade_app()
     {
         resolve(UpdateSystemAction::class)();

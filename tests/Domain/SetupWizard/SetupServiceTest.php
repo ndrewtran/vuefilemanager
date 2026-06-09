@@ -3,13 +3,12 @@ namespace Tests\Domain\SetupWizard;
 
 use Storage;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Domain\Localization\Actions\SeedDefaultLanguageAction;
 
 class SetupServiceTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_create_system_folders()
     {
         // folders are created in TestCase
@@ -19,9 +18,7 @@ class SetupServiceTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_seed_default_language()
     {
         resolve(SeedDefaultLanguageAction::class)();

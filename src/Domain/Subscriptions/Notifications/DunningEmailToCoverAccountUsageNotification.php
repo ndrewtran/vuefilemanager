@@ -72,7 +72,7 @@ class DunningEmailToCoverAccountUsageNotification extends Notification implement
             ],
             'usage_bigger_than_balance'   => [
                 [
-                    'subject' => __t("usage_bigger_than_balance_1_subject"),
+                    'subject' => __t('usage_bigger_than_balance_1_subject'),
                     'line'    => __t('usage_bigger_than_balance_1_line'),
                 ],
                 [

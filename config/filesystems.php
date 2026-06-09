@@ -54,13 +54,14 @@ return [
             'password' => env('FTP_PASSWORD'),
         ],
         'azure' => [
-            'driver'            => 'azure',
-            'name'              => env('AZURE_STORAGE_NAME'),
-            'key'               => env('AZURE_STORAGE_KEY'),
-            'container'         => env('AZURE_STORAGE_CONTAINER'),
-            'url'               => env('AZURE_STORAGE_URL'),
-            'prefix'            => null,
-            'connection_string' => env('AZURE_STORAGE_CONNECTION_STRING'), // optional, will override default endpoint builder
+            'driver'              => 'azure-storage-blob',
+            'account_name'        => env('AZURE_STORAGE_NAME'),
+            'account_key'         => env('AZURE_STORAGE_KEY'),
+            'container'           => env('AZURE_STORAGE_CONTAINER'),
+            'endpoint'            => env('AZURE_STORAGE_URL'),
+            'prefix'              => null,
+            'connection_string'   => env('AZURE_STORAGE_CONNECTION_STRING'),
+            'is_public_container' => false,
         ],
     ],
 ];

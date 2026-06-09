@@ -6,12 +6,11 @@ use App\Users\Models\User;
 use Domain\Files\Models\File;
 use Domain\Folders\Models\Folder;
 use Illuminate\Support\Facades\Config;
+use PHPUnit\Framework\Attributes\Test;
 
 class HelperTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_test_split_name()
     {
         $firstTest = split_name('Jane Doe');
@@ -30,9 +29,7 @@ class HelperTest extends TestCase
         $this->assertEquals('', $thirdTest['last_name']);
     }
 
-    /**
-    * @test
-    */
+    #[Test]
     public function it_test_get_records_count()
     {
         $user = User::factory()

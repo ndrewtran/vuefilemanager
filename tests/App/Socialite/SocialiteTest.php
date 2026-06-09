@@ -7,14 +7,13 @@ use Tests\TestCase;
 use App\Users\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\Test;
 use Laravel\Socialite\Two\FacebookProvider;
 use Laravel\Socialite\Contracts\Factory as Socialite;
 
 class SocialiteTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function socialite_redirect_user()
     {
         $response = $this->get('api/socialite/google/redirect');
@@ -22,9 +21,7 @@ class SocialiteTest extends TestCase
         $this->assertStringContainsString('accounts.google.com/o/oauth2/auth', $response->json()['data']['url']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function socialite_execute_provider_callback()
     {
         // Create fake image

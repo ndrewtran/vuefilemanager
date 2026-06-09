@@ -271,7 +271,7 @@ if (! function_exists('get_invoice_number')) {
      */
     function get_invoice_number()
     {
-        $invoices = \App\Invoice::all();
+        $invoices = App\Invoice::all();
 
         if ($invoices->isEmpty()) {
             return now()->year . '001';
@@ -289,7 +289,7 @@ if (! function_exists('cache_forget_many')) {
     function cache_forget_many($cache)
     {
         foreach ($cache as $item) {
-            \Illuminate\Support\Facades\Cache::forget($item);
+            Illuminate\Support\Facades\Cache::forget($item);
         }
     }
 }
@@ -298,7 +298,7 @@ if (! function_exists('get_storage')) {
     /**
      * Get app version from config
      *
-     * @return \Illuminate\Config\Repository|mixed
+     * @return Illuminate\Config\Repository|mixed
      */
     function get_storage()
     {
@@ -324,7 +324,7 @@ if (! function_exists('get_version')) {
     /**
      * Get app version from config
      *
-     * @return \Illuminate\Config\Repository|mixed
+     * @return Illuminate\Config\Repository|mixed
      */
     function get_version()
     {
@@ -384,7 +384,7 @@ if (! function_exists('get_shared')) {
      * Get shared token
      *
      * @param $token
-     * @return \Illuminate\Database\Eloquent\Builder|Model
+     * @return Illuminate\Database\Eloquent\Builder|Model
      */
     function get_shared($token)
     {
@@ -1085,12 +1085,10 @@ if (! function_exists('replace_occurrence')) {
      */
     function replace_occurrence($string, $values)
     {
-        $occurrences = $values->map(function ($message, $key) {
-            return [
-                'key'     => ":$key",
-                'message' => $message,
-            ];
-        });
+        $occurrences = $values->map(fn ($message, $key) => [
+            'key'     => ":$key",
+            'message' => $message,
+        ]);
 
         return str_ireplace(
             $occurrences->pluck('key')->toArray(),

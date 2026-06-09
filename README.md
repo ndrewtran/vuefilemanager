@@ -218,7 +218,7 @@ We strongly recommend only for experienced users to set up and running VueFileMa
 **For running app make sure you have:**
 
 - VPS server with SSH access
-- PHP >= 8.0.2 version (8.1+ recommended)
+- PHP >= 8.3
 - Nginx
 - Supervisor
 - Certbot
@@ -232,7 +232,7 @@ cd /var/www/sockets
 ```
 Run installation command for websocket server. You will be prompted to type host of which you want to allow incoming requests.
 ```
-php artisan websockets:install
+php artisan reverb:configure-production
 ```
 ### Domain & Nginx Set Up
 Create subdomain for your socket host, for example `socket.vuefilemanager.com` and direct this subdomain to your vps where socket server will be running.
@@ -276,12 +276,12 @@ certbot --nginx
 ```
 ### Supervisor Configuration
 We need supervisor to manage running your websocket server on the background.
-In `/etc/supervisor/conf.d` (Debian/Ubuntu) or `/etc/supervisord.d/` (Red Hat/CentOS) create a file `websockets.conf`.
+In `/etc/supervisor/conf.d` (Debian/Ubuntu) or `/etc/supervisord.d/` (Red Hat/CentOS) create a file `reverb.conf`.
 
 Just edit php path, project path and user when they are different for your vps:
 ```
-[program:websockets]
-command=/usr/bin/php /var/www/socket/artisan websockets:serve
+[program:reverb]
+command=/usr/bin/php /var/www/socket/artisan reverb:start
 numprocs=1
 autostart=true
 autorestart=true
@@ -289,11 +289,11 @@ user=www-data
 ```
 Run command below to start your websocket server:
 ```
-supervisorctl start websockets
+supervisorctl start reverb
 ```
 Run command below to stop your websocket server:
 ```
-supervisorctl stop websockets
+supervisorctl stop reverb
 ```
 When you update code or server for some reason, you must also update running supervisor:
 ```

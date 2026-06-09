@@ -3,6 +3,7 @@ namespace Tests\App\Users;
 
 use Tests\TestCase;
 use App\Users\Models\User;
+use PHPUnit\Framework\Attributes\Test;
 use App\Users\Actions\FormatUsageEstimatesAction;
 use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use VueFileManager\Subscription\Domain\Plans\Models\PlanFixedFeature;
@@ -12,24 +13,22 @@ use VueFileManager\Subscription\Support\Events\SubscriptionWasUpdated;
 
 class UserSubscriptionTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_set_user_limitations_for_new_subscription()
     {
         $plan = Plan::factory()
             ->has(PlanFixedFeature::factory()
-            ->count(2)
-            ->sequence(
-                [
-                    'key'   => 'max_storage_amount',
-                    'value' => 200,
-                ],
-                [
-                    'key'   => 'max_team_members',
-                    'value' => 20,
-                ],
-            ), 'fixedFeatures')
+                ->count(2)
+                ->sequence(
+                    [
+                        'key'   => 'max_storage_amount',
+                        'value' => 200,
+                    ],
+                    [
+                        'key'   => 'max_team_members',
+                        'value' => 20,
+                    ],
+                ), 'fixedFeatures')
             ->create();
 
         $user = User::factory()
@@ -46,24 +45,22 @@ class UserSubscriptionTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_set_user_limitations_for_updated_subscription()
     {
         $plan = Plan::factory()
             ->has(PlanFixedFeature::factory()
-            ->count(2)
-            ->sequence(
-                [
-                    'key'   => 'max_storage_amount',
-                    'value' => 200,
-                ],
-                [
-                    'key'   => 'max_team_members',
-                    'value' => 20,
-                ],
-            ), 'fixedFeatures')
+                ->count(2)
+                ->sequence(
+                    [
+                        'key'   => 'max_storage_amount',
+                        'value' => 200,
+                    ],
+                    [
+                        'key'   => 'max_team_members',
+                        'value' => 20,
+                    ],
+                ), 'fixedFeatures')
             ->create();
 
         $user = User::factory()
@@ -80,9 +77,7 @@ class UserSubscriptionTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_set_user_limitations_for_expired_subscription()
     {
         $user = User::factory()
@@ -102,9 +97,7 @@ class UserSubscriptionTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_format_price_estimates()
     {
         $usages = collect([

@@ -5,12 +5,11 @@ use DB;
 use Str;
 use Tests\TestCase;
 use App\Users\Models\User;
+use PHPUnit\Framework\Attributes\Test;
 
 class NotificationsTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_all_notifications()
     {
         $user = User::factory()
@@ -49,9 +48,7 @@ class NotificationsTest extends TestCase
             ->assertStatus(200);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_mark_as_read_notifications()
     {
         $user = User::factory()
@@ -91,9 +88,7 @@ class NotificationsTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_delete_all_notifications()
     {
         $user = User::factory()

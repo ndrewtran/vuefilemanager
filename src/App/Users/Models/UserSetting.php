@@ -5,7 +5,6 @@ use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use TeamTNT\TNTSearch\Indexer\TNTIndexer;
 use Database\Factories\UserSettingFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -81,11 +80,9 @@ class UserSetting extends Model
             'UTF-8'
         );
 
-        $nameNgrams = (new TNTIndexer)
-            ->buildTrigrams(implode(', ', [$name]));
+        $nameNgrams = $this->buildTrigrams(implode(', ', [$name]));
 
-        $emailNgrams = (new TNTIndexer)
-            ->buildTrigrams(implode(', ', [$this->user->email]));
+        $emailNgrams = $this->buildTrigrams(implode(', ', [$this->user->email]));
 
         return [
             'id'          => $this->id,
@@ -94,6 +91,18 @@ class UserSetting extends Model
             'email'       => $this->user->email,
             'emailNgrams' => $emailNgrams,
         ];
+    }
+
+    private function buildTrigrams(string $keyword): string
+    {
+        $token = "__{$keyword}__";
+        $trigrams = [];
+
+        for ($i = 0; $i < mb_strlen($token) - 2; $i++) {
+            $trigrams[] = mb_substr($token, $i, 3);
+        }
+
+        return implode(' ', $trigrams);
     }
 
     protected static function boot()

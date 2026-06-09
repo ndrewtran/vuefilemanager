@@ -79,9 +79,9 @@ class ProcessFileAction
 
         // Move file to external storage
         match (config('filesystems.default')) {
-            's3' => ($this->moveFileToExternalStorage)($name, $user->id),
+            's3'           => ($this->moveFileToExternalStorage)($name, $user->id),
             'ftp', 'azure' => ($this->moveFileToFTPStorage)($name, $user->id),
-            default => null
+            default        => null
         };
 
         // Create new file

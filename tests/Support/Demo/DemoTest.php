@@ -4,13 +4,12 @@ namespace Tests\Support\Demo;
 use Tests\TestCase;
 use App\Users\Models\User;
 use Domain\Sharing\Models\Share;
+use PHPUnit\Framework\Attributes\Test;
 use Support\Demo\Actions\ClearHowdyDemoDataAction;
 
 class DemoTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_delete_howdy_shared_links()
     {
         $user = User::factory()

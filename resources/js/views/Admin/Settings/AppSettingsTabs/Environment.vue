@@ -130,10 +130,11 @@ export default {
 							broadcastingCluster: this.broadcast.cluster,
 						},
 						'native': {
-							broadcasting: 'pusher',
+							broadcasting: 'reverb',
 							broadcastingHost: this.broadcast.host,
 							broadcastingKey: 'local',
 							broadcastingCluster: 'local',
+							broadcastingPort: 8080,
 						},
 						'none': {
 							broadcasting: 'null',
@@ -161,6 +162,10 @@ export default {
 							})
 
 							if (key === 'broadcasting' && value === 'pusher') {
+								this.$store.dispatch('runConnection')
+							}
+
+							if (key === 'broadcasting' && value === 'reverb') {
 								this.$store.dispatch('runConnection')
 							}
 						})

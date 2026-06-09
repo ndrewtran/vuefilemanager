@@ -1,15 +1,15 @@
 <?php
 namespace Support\Upgrading\Controllers;
 
-use Illuminate\Support\Facades\Artisan;
-use Domain\Localization\Models\Language;
-use Domain\Settings\Models\Setting;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use App\Users\Models\User;
 use Illuminate\Support\Arr;
 use Domain\Files\Models\File;
 use Domain\Folders\Models\Folder;
+use Illuminate\Support\Facades\DB;
+use Domain\Settings\Models\Setting;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
+use Domain\Localization\Models\Language;
 use Domain\Maintenance\Actions\UpgradeDatabaseAction;
 use VueFileManager\Subscription\Domain\Plans\Models\Plan;
 use Domain\Localization\Actions\DeleteLanguageTranslationsAction;

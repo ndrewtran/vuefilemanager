@@ -5,14 +5,12 @@ use Tests\TestCase;
 use App\Users\Models\User;
 use Illuminate\Http\UploadedFile;
 use Domain\Settings\Models\Setting;
-use Illuminate\Support\Facades\Http;
+use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Support\Facades\Storage;
 
 class SetupWizardTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_setup_database()
     {
         $this->postJson('/api/setup/database', [
@@ -25,9 +23,7 @@ class SetupWizardTest extends TestCase
         ])->assertStatus(200);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_store_app_settings()
     {
         Setting::all()->each->delete();
@@ -94,9 +90,7 @@ class SetupWizardTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_create_admin_account()
     {
         Setting::all()->each->delete();
@@ -162,9 +156,7 @@ class SetupWizardTest extends TestCase
             );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_try_to_create_admin_account_after_setup_wizard_success()
     {
         Setting::updateOrCreate(

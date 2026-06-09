@@ -3,12 +3,11 @@ namespace Tests\App\Restrictions;
 
 use Tests\TestCase;
 use Domain\Settings\Models\Setting;
+use PHPUnit\Framework\Attributes\Test;
 
 class RestrictionsTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_metered_driver()
     {
         Setting::updateOrCreate([
@@ -19,9 +18,7 @@ class RestrictionsTest extends TestCase
 
         $this->assertEquals('metered', get_restriction_driver());
     }
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_fixed_driver()
     {
         Setting::updateOrCreate([
@@ -32,9 +29,7 @@ class RestrictionsTest extends TestCase
 
         $this->assertEquals('fixed', get_restriction_driver());
     }
-    /**
-     * @test
-     */
+    #[Test]
     public function it_get_default_driver()
     {
         $subscriptionType = Setting::where('name', 'subscription_type')

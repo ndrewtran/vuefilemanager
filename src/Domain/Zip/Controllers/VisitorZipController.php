@@ -1,12 +1,12 @@
 <?php
 namespace Domain\Zip\Controllers;
 
-use ZipStream\ZipStream;
 use Illuminate\Http\Request;
 use Domain\Files\Models\File;
 use Domain\Sharing\Models\Share;
 use Domain\Folders\Models\Folder;
 use Domain\Zip\Actions\ZipAction;
+use Domain\Zip\Support\ZipDownload;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -30,7 +30,7 @@ class VisitorZipController extends Controller
     public function __invoke(
         Request $request,
         Share $shared,
-    ): ZipStream {
+    ): ZipDownload {
         $items = extractItemsFromGetAttribute($request->get('items'));
 
         // Validate items GET attribute

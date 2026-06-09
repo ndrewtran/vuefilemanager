@@ -8,9 +8,9 @@ use Domain\Files\Models\File;
 use Domain\Sharing\Models\Share;
 use Domain\Folders\Models\Folder;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -78,7 +78,7 @@ class AuthServiceProvider extends ServiceProvider
     private function registerGates(): void
     {
         // Define admin maintenance gate
-        Gate::define('maintenance', fn($user) => $user->role === 'admin');
+        Gate::define('maintenance', fn ($user) => $user->role === 'admin');
 
         // Define user ability to edit file or folder
         collect(['can-edit', 'can-view'])
@@ -108,11 +108,9 @@ class AuthServiceProvider extends ServiceProvider
 
     private function registerCustomVerificationEmail(): void
     {
-        VerifyEmail::toMailUsing(function ($notifiable, $url) {
-            return (new MailMessage)
-                ->subject(__t('verify_email_subject'))
-                ->line(__t('verify_email_line'))
-                ->action(__t('verify_email_action'), $url);
-        });
+        VerifyEmail::toMailUsing(fn ($notifiable, $url) => (new MailMessage)
+            ->subject(__t('verify_email_subject'))
+            ->line(__t('verify_email_line'))
+            ->action(__t('verify_email_action'), $url));
     }
 }

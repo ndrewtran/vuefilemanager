@@ -2,13 +2,12 @@
 namespace Domain\Zip\Actions;
 
 use Gate;
-use ZipStream\ZipStream;
 use Illuminate\Support\Str;
 use Domain\Sharing\Models\Share;
 use Domain\Folders\Models\Folder;
 use Illuminate\Support\Collection;
+use Domain\Zip\Support\ZipDownload;
 use Illuminate\Support\Facades\Storage;
-use STS\ZipStream\ZipStreamFacade as Zip;
 
 class ZipAction
 {
@@ -16,14 +15,14 @@ class ZipAction
         Collection $folders,
         Collection $files,
         ?Share $shared = null
-    ): ZipStream {
+    ): ZipDownload {
         // Get zip name from single requested folder
         if ($files->isEmpty() && $folders->count() === 1) {
             $zipName = Str::slug($folders->first()->name) . '.zip';
         }
 
         // Create zip
-        $zip = Zip::create($zipName ?? 'files.zip');
+        $zip = ZipDownload::create($zipName ?? 'files.zip');
 
         // Zip Files
         $files->map(function ($file) use ($zip, $shared) {
@@ -46,7 +45,7 @@ class ZipAction
                 if (isStorageDriver('s3')) {
                     $bucketName = config('filesystems.disks.s3.bucket');
 
-                    $zip->add("s3://$bucketName/$filePath", $file->name);
+                    $zip->addRaw(Storage::get($filePath), $file->name);
                 }
 
                 // ftp client
@@ -87,7 +86,7 @@ class ZipAction
                     if (isStorageDriver('s3')) {
                         $bucketName = config('filesystems.disks.s3.bucket');
 
-                        $zip->add("s3://$bucketName/$filePath", $zipDestination);
+                        $zip->addRaw(Storage::get($filePath), $zipDestination);
                     }
 
                     if (isStorageDriver('ftp')) {
@@ -96,7 +95,7 @@ class ZipAction
                 }
             }
         });
-        
+
         return $zip;
     }
 }

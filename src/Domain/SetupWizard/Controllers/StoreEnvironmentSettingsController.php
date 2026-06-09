@@ -35,8 +35,8 @@ class StoreEnvironmentSettingsController extends Controller
             // Get storage driver from request
             $StorageDriver = match ($request->input('storage.driver')) {
                 's3', 'storj', 'spaces', 'wasabi', 'backblaze', 'oss', 'other' => 's3',
-                'local' => 'local',
-                'ftp'   => 'ftp',
+                'local'                                                        => 'local',
+                'ftp'                                                          => 'ftp',
             };
 
             // Test driver connection
@@ -95,14 +95,13 @@ class StoreEnvironmentSettingsController extends Controller
                         'PUSHER_APP_TLS'     => 'true',
                     ],
                     'native' => [
-                        'BROADCAST_DRIVER'   => 'pusher',
-                        'PUSHER_APP_ID'      => 'local',
-                        'PUSHER_APP_KEY'     => 'local',
-                        'PUSHER_APP_SECRET'  => 'local',
-                        'PUSHER_APP_CLUSTER' => 'local',
-                        'PUSHER_APP_HOST'    => $request->input('broadcast.host'),
-                        'PUSHER_APP_PORT'    => '',
-                        'PUSHER_APP_TLS'     => $request->boolean('tls') ? 'true' : 'false',
+                        'BROADCAST_DRIVER'  => 'reverb',
+                        'REVERB_APP_ID'     => 'local',
+                        'REVERB_APP_KEY'    => 'local',
+                        'REVERB_APP_SECRET' => 'local',
+                        'REVERB_HOST'       => $request->input('broadcast.host'),
+                        'REVERB_PORT'       => '8080',
+                        'REVERB_SCHEME'     => $request->boolean('tls') ? 'https' : 'http',
                     ],
                     'none'   => [
                         'BROADCAST_DRIVER' => 'null',

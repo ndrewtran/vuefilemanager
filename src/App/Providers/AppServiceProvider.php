@@ -1,8 +1,8 @@
 <?php
 namespace App\Providers;
 
-use PDOException;
 use Schema;
+use PDOException;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -67,16 +67,17 @@ class AppServiceProvider extends ServiceProvider
                         'active' => isset($settings->limit_usage_in_new_accounts) ? intval($settings->limit_usage_in_new_accounts) : true,
                         'amount' => isset($settings->limit_usage_in_new_accounts_amount) ? intval($settings->limit_usage_in_new_accounts_amount) : 20,
                     ],
-                ]
+                ],
             ]);
-        } catch (PDOException $e) {}
+        } catch (PDOException $e) {
+        }
     }
 
     private function setLocale(): void
     {
         try {
             $appLocale = get_settings('language') ?? 'en';
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $appLocale = 'en';
         }
 

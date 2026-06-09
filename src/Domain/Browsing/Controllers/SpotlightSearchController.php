@@ -8,8 +8,10 @@ use Domain\Files\Models\File;
 use App\Users\Models\UserSetting;
 use Domain\Folders\Models\Folder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Domain\Items\Requests\SearchRequest;
+use Illuminate\Database\Eloquent\Builder;
 use Domain\Files\Resources\FilesCollection;
 use Domain\Folders\Resources\FolderCollection;
 use App\Users\Resources\UsersMinimalCollection;
@@ -88,16 +90,25 @@ class SpotlightSearchController
             ->where('user_id', $user_id)
             ->orWhereIn('parent_id', $accessible_parent_ids);
 
+        $folderFallbackQuery = Folder::query()
+            ->where('user_id', $user_id)
+            ->orWhereIn('id', $accessible_parent_ids);
+
+        $fileFallbackQuery = File::query()
+            ->where('user_id', $user_id)
+            ->orWhereIn('parent_id', $accessible_parent_ids);
+
         // Search files and folders
         $files = File::search($query)
             ->constrain($fileConstrain)
-            ->get()
-            ->take(3);
+            ->get();
 
         $folders = Folder::search($query)
             ->constrain($folderConstrain)
-            ->get()
-            ->take(3);
+            ->get();
+
+        $files = $this->appendNameFallbackResults($files, $fileFallbackQuery, $query);
+        $folders = $this->appendNameFallbackResults($folders, $folderFallbackQuery, $query);
 
         $entries = collect([
             $folders ? json_decode((new FolderCollection($folders))->toJson(), true) : null,
@@ -108,5 +119,26 @@ class SpotlightSearchController
         return response()->json([
             'data' => $entries,
         ]);
+    }
+
+    private function appendNameFallbackResults(
+        Collection $results,
+        Builder $query,
+        string $search
+    ): Collection {
+        $resultIds = $results->pluck('id');
+
+        $fallbackResults = (clone $query)
+            ->get()
+            ->filter(
+                fn ($entry) => ! $resultIds->contains($entry->id)
+                    && mb_stripos(remove_accents($entry->name), $search) !== false
+            );
+
+        return $fallbackResults
+            ->concat($results)
+            ->unique('id')
+            ->take(3)
+            ->values();
     }
 }

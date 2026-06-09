@@ -7,12 +7,11 @@ use Domain\Files\Models\File;
 use Domain\Sharing\Models\Share;
 use Domain\Folders\Models\Folder;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\Test;
 
 class GateTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function owner_rename_folder()
     {
         $user = User::factory()
@@ -40,9 +39,7 @@ class GateTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function guest_rename_folder()
     {
         // check private or public share record
@@ -110,9 +107,7 @@ class GateTest extends TestCase
             });
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function team_member_with_can_edit_privilege_rename_folder()
     {
         $owner = User::factory()
@@ -163,9 +158,7 @@ class GateTest extends TestCase
             ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function team_member_with_can_visit_privilege_try_rename_folder()
     {
         $owner = User::factory()
@@ -216,9 +209,7 @@ class GateTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function team_member_rename_file()
     {
         $owner = User::factory()

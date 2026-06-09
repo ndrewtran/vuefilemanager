@@ -1,5 +1,4 @@
 <?php
-
 namespace Domain\Settings\Actions;
 
 use DB;
@@ -15,7 +14,8 @@ class GetConfigAction
 {
     public function __construct(
         public GetServerSetupStatusAction $getServerSetupStatus,
-    ) {}
+    ) {
+    }
 
     public function __invoke(): array
     {
@@ -107,13 +107,7 @@ class GetConfigAction
                 'isPrefilledUsers'         => config('vuefilemanager.is_prefilled_users') ? 1 : 0,
                 'statusCheck'              => json_encode($serverInfo) ?? 'undefined',
             ],
-            'broadcasting'        => [
-                'driver'  => config('broadcasting.default'),
-                'key'     => config('broadcasting.connections.pusher.key'),
-                'host'    => config('broadcasting.connections.pusher.options.host'),
-                'port'    => config('broadcasting.connections.pusher.options.port'),
-                'cluster' => config('broadcasting.connections.pusher.options.cluster'),
-            ],
+            'broadcasting'        => $this->broadcastingConfig(),
             'logos'               => [
                 'main'            => $settings->app_logo ?? null,
                 'og_image'        => $settings->app_og_image ?? null,
@@ -200,6 +194,20 @@ class GetConfigAction
             'teamsDefaultMembers' => intval($settings->default_max_team_member ?? 10),
             'legal'               => $pages ? json_encode($pages) : 'undefined',
             'google_analytics'    => optional($settings)->google_analytics ?? null,
+        ];
+    }
+
+    private function broadcastingConfig(): array
+    {
+        $driver = config('broadcasting.default');
+        $connection = config("broadcasting.connections.{$driver}", config('broadcasting.connections.pusher'));
+
+        return [
+            'driver'  => $driver,
+            'key'     => $connection['key'] ?? null,
+            'host'    => $connection['options']['host'] ?? null,
+            'port'    => $connection['options']['port'] ?? null,
+            'cluster' => $connection['options']['cluster'] ?? null,
         ];
     }
 }

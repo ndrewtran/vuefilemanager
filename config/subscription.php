@@ -23,14 +23,14 @@ return [
     ],
 
     'notifications' => [
-        'DunningEmailToCoverAccountUsageNotification' => \Domain\Subscriptions\Notifications\DunningEmailToCoverAccountUsageNotification::class,
-        'ChargeFromCreditCardFailedAgainNotification' => \Domain\Subscriptions\Notifications\ChargeFromCreditCardFailedAgainNotification::class,
-        'ChargeFromCreditCardFailedNotification'      => \Domain\Subscriptions\Notifications\ChargeFromCreditCardFailedNotification::class,
-        'SubscriptionWasCreatedNotification'          => \Domain\Subscriptions\Notifications\SubscriptionWasCreatedNotification::class,
-        'BillingAlertTriggeredNotification'           => \Domain\Subscriptions\Notifications\BillingAlertTriggeredNotification::class,
-        'ConfirmStripePaymentNotification'            => \Domain\Subscriptions\Notifications\ConfirmStripePaymentNotification::class,
-        'InsufficientBalanceNotification'             => \Domain\Subscriptions\Notifications\InsufficientBalanceNotification::class,
-        'BonusCreditAddedNotification'                => \Domain\Subscriptions\Notifications\BonusCreditAddedNotification::class,
+        'DunningEmailToCoverAccountUsageNotification' => Domain\Subscriptions\Notifications\DunningEmailToCoverAccountUsageNotification::class,
+        'ChargeFromCreditCardFailedAgainNotification' => Domain\Subscriptions\Notifications\ChargeFromCreditCardFailedAgainNotification::class,
+        'ChargeFromCreditCardFailedNotification'      => Domain\Subscriptions\Notifications\ChargeFromCreditCardFailedNotification::class,
+        'SubscriptionWasCreatedNotification'          => Domain\Subscriptions\Notifications\SubscriptionWasCreatedNotification::class,
+        'BillingAlertTriggeredNotification'           => Domain\Subscriptions\Notifications\BillingAlertTriggeredNotification::class,
+        'ConfirmStripePaymentNotification'            => Domain\Subscriptions\Notifications\ConfirmStripePaymentNotification::class,
+        'InsufficientBalanceNotification'             => Domain\Subscriptions\Notifications\InsufficientBalanceNotification::class,
+        'BonusCreditAddedNotification'                => Domain\Subscriptions\Notifications\BonusCreditAddedNotification::class,
     ],
 
     'metered_billing' => [
@@ -58,6 +58,6 @@ return [
         ],
     ],
 
-    'is_demo' => env('APP_DEMO', false),
+    'is_demo'  => env('APP_DEMO', false),
     'is_local' => env('APP_ENV', 'production') === 'local',
 ];

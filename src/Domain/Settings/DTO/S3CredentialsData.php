@@ -1,15 +1,22 @@
 <?php
 namespace Domain\Settings\DTO;
 
-use Spatie\DataTransferObject\DataTransferObject;
-
-class S3CredentialsData extends DataTransferObject
+class S3CredentialsData
 {
     public string $key;
     public string $secret;
     public string $region;
     public string $bucket;
     public string $endpoint;
+
+    public function __construct(array $data)
+    {
+        $this->key = $data['key'];
+        $this->secret = $data['secret'];
+        $this->region = $data['region'];
+        $this->bucket = $data['bucket'];
+        $this->endpoint = $data['endpoint'];
+    }
 
     public static function fromRequest($request): self
     {
