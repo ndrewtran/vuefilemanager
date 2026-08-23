@@ -18,17 +18,17 @@
     ],
     "require": {
         "php": "^8.3",
-        "guzzlehttp/guzzle": "^7.4.1",
+        "guzzlehttp/guzzle": "^7.11.1",
         "kyslik/column-sortable": "^8.0",
-        "laravel/sanctum": "^4.3",
-        "spatie/laravel-package-tools": "^1.92",
-        "spatie/laravel-queueable-action": "^2.14.1",
-        "stripe/stripe-php": "^7.114"
+        "laravel/sanctum": "^4.3.3",
+        "spatie/laravel-package-tools": "^1.93.1",
+        "spatie/laravel-queueable-action": "^2.17",
+        "stripe/stripe-php": "^7.128"
     },
     "require-dev": {
-        "brianium/paratest": "^6.4.3",
+        "brianium/paratest": "7.8.*",
         "larastan/larastan": "^3.10",
-        "nunomaduro/collision": "^8.8",
+        "nunomaduro/collision": "^8.9.5",
         "orchestra/testbench": "^10.8",
         "phpunit/phpunit": "^11.5",
         "spatie/laravel-ray": "^1.29.4",

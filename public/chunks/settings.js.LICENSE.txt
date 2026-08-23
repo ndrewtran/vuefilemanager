@@ -1,5 +1,5 @@
 /*!
- * paypal-js v4.2.2 (2021-12-17T22:31:37.036Z)
+ * paypal-js v10.1.0 (2026-07-27T18:48:45.288Z)
  * Copyright 2020-present, PayPal, Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
